@@ -1,0 +1,51 @@
+html
+{
+    width: 100%;
+    height: 100%;
+}
+
+body
+{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+}
+
+#genWeaponBtn{
+    font-size: 2rem;
+}
+
+#weaponName{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+#chimney{
+    position: relative;
+    width: 30rem;
+    height: 30rem;
+    background-color: grey;
+}
+
+#monsterHP {
+    position: absolute;
+    height: 2rem;
+    width: 100%;
+    background-color: darkred;
+    left: 0;
+    top: 0;
+}
+
+#heroHP{
+    position: absolute;
+    height: 2rem;
+    width: 100%;
+    background-color: green;
+    left: 0;
+    bottom: 0;
+}
