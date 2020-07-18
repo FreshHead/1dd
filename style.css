@@ -49,3 +49,24 @@ body
     left: 0;
     bottom: 0;
 }
+
+#potion {
+    height: 5rem;
+    width: 5rem;
+}
+
+#bag img{
+    height: 5rem;
+    width: 5rem;
+}
+
+#body img{
+    height: 5rem;
+    width: 5rem;
+}
+
+#monster {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}

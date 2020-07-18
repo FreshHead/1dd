@@ -18,5 +18,7 @@
   "bugs": {
     "url": "https://github.com/FreshHead/1dd/issues"
   },
-  "homepage": "https://github.com/FreshHead/1dd#readme"
+  "homepage": "https://github.com/FreshHead/1dd#readme",
+  "dependencies": {
+  }
 }
