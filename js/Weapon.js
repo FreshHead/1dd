@@ -1,4 +1,5 @@
 export default class Weapon {
+  category = "weapons";
   constructor(quality, material, type, enchantment){
     this.quality = quality
     this.material = material

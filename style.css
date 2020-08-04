@@ -55,10 +55,25 @@ body
     width: 5rem;
 }
 
+#bag {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    background: brown;
+    width: 15rem;
+    height: 15rem;
+}
+
 #bag img{
     height: 5rem;
     width: 5rem;
 }
+
+/*#bag div{
+    background-color: blue;
+    height: 5rem;
+    width: 5rem;
+}*/
 
 #body img{
     height: 5rem;
@@ -66,7 +81,7 @@ body
 }
 
 #monster {
-    height: 100%;
-    width: 100%;
+    height: 95%;
+    width: 95%;
     object-fit: contain;
 }

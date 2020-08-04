@@ -9,62 +9,87 @@ import Snapper from "./monsters/Snapper.js"
 const generator = new Generator();
 console.log("main стартовал")
 
+let hero = new Hero();
+let bag = new Bag();
+
 $("#genWeaponBtn").click(function () {
     let weapon = generator.genWeapon();
     $("#weaponName").text(weapon.toString())
 });
 
-$("#bag").on('click', '.weapon', function () {
+$("#bag").on('click', '.weapons', function () {
   let e = window.event;
   let target = e.target;
-  console.log("Выбрано оружие")
+  console.log(`Выбрано оружие ${target.name}`)
 });
 
-let hero = new Hero();
-let bag = new Bag();
- 
+$("#chimney").droppable({
+    drop: (event, ui)=> {
+    var draggable = ui.draggable;
+    bag.removeItem(draggable);
+    }
+});
 
 function battle(monster) {
     return new Promise((monsterKilled, heroKiled)=>{
         $('#monster').attr("src",`res/monsters/${monster.constructor.name.toLowerCase()}.png`);
-        // $('#monster').css('visibility', 'visible');
+        setTimeout(() => { // Костыльная пауза, чтобы изображение успело смениться.
+            $("#monsterHP").width("100%");
+            $('#monster').css('visibility', 'visible');
+            $('#monster').fadeIn();
 
-        let monsterTurn = setInterval(() => {
-        hero.hp -= 3;
-        $("#heroHP").width((hero.hp / 100 * 100) + "%")
-        console.log(`Жизнь героя:  ${hero.hp}/${hero.maxHp} hp`);
-        if (hero.hp <= 0) {
-            clearInterval(heroTurn);
-            clearInterval(monsterTurn);
-            console.log("Герой погиб")
-            heroKiled();
-        }
-    }, 800);
+            let monsterTurn = setInterval(() => {
+                $('#monster').animate({
+                    width: '102%'
+                }, "fast",
+                () => {
+                    let damage = Math.floor(Math.random() * (monster.maxDmg - monster.minDmg) + monster.minDmg);
+                    hero.hp -= damage;
+                    $("#heroHP").width((hero.hp / hero.maxHp * 100) + "%")
+                    console.log(`${monster.name} нанёс ${damage} урона`)
+                    console.log(`Жизнь героя:  ${hero.hp}/${hero.maxHp} hp`);
+                    if (hero.hp <= 0) {
+                        clearInterval(heroTurn);
+                        clearInterval(monsterTurn);
+                        console.log("Герой погиб")
+                        heroKiled();
+                    }
+                $('#monster').animate({
+                    width: '100%'
+                }, "fast");
+            });
 
-        let heroTurn = setInterval(() => {
-            monster.hp -= 5;
-            $("#monsterHP").width((monster.hp / 40 * 100) + "%")
-            console.log(`Жизнь ${monster.name}: ${monster.hp}/${monster.maxHp} hp`);
-            if (monster.hp <= 0) {
-                clearInterval(heroTurn);
-                clearInterval(monsterTurn);
-                console.log(`${monster.name} повержен`)
-                // $('#monster').css('visibility', 'hidden');
-                monsterKilled();
-            }
-        }, 1000);
+        }, monster.speed);
+
+            let heroTurn = setInterval(() => {
+                monster.hp -= 5;
+                $("#monsterHP").width((monster.hp / monster.maxHp * 100) + "%")
+                console.log(`Жизнь ${monster.name}: ${monster.hp}/${monster.maxHp} hp`);
+                if (monster.hp <= 0) {
+                    clearInterval(heroTurn);
+                    clearInterval(monsterTurn);
+                    console.log(`${monster.name} повержен`)
+                    bag.addItem(monster.drop[0]);
+                    $('#monster').fadeOut('800', ()=> {
+                        $('#monster').css('visibility', 'hidden');
+                        monsterKilled();
+                    });
+                }
+            }, 1000);
+        }, 200);
     });
 };
 
 function getRandomMonster() {
-    let monsters = [Bat, Ghost, Imp, Snapper];
+    let monsters = [Bat, Imp];//, Ghost, Imp, Snapper];
     let randomInd = Math.floor(Math.random() * monsters.length);
     return new monsters[randomInd];
 }
 
 function gameLoop() {
-    setTimeout(() => battle(getRandomMonster()).then(gameLoop), 1000);
-  
+    setTimeout(() => battle(getRandomMonster()).then(gameLoop)
+        .catch(() => { alert("Герой погиб. Нажмите ctrl+r, чтобы начать заново.") })
+        , 1000);
 } 
 gameLoop();
 
@@ -76,4 +101,3 @@ $("#potion").click(function () {
         console.log(`Герой выпил зелье. Осталось ${hero.potions} глотков зелья`)
     }
 });
-
