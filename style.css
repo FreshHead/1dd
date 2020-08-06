@@ -69,6 +69,14 @@ body
     width: 5rem;
 }
 
+.item {
+    cursor: grab;
+}
+
+.item:active {
+    cursor: grabbing;
+}
+
 /*#bag div{
     background-color: blue;
     height: 5rem;

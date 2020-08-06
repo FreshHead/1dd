@@ -7,15 +7,10 @@ import Imp from "./monsters/Imp.js"
 import Snapper from "./monsters/Snapper.js"
 
 const generator = new Generator();
-console.log("main стартовал")
+console.log("Игра началась!")
 
 let hero = new Hero();
 let bag = new Bag();
-
-$("#genWeaponBtn").click(function () {
-    let weapon = generator.genWeapon();
-    $("#weaponName").text(weapon.toString())
-});
 
 $("#bag").on('click', '.weapons', function () {
   let e = window.event;
@@ -60,7 +55,6 @@ function battle(monster) {
             });
 
         }, monster.speed);
-
             let heroTurn = setInterval(() => {
                 monster.hp -= 5;
                 $("#monsterHP").width((monster.hp / monster.maxHp * 100) + "%")

@@ -5,19 +5,32 @@ export default class Bag {
 	capasity = 9;
 	items = [new Sword()];
     constructor() {
-    	this.items.forEach(item => $('#bag').append(`<div><img src=./res/${item.category}/${item.constructor.name.toLowerCase()}.png class="${item.category}" draggable="false"/></div>`));
+        this.rerender()
+    	// this.items.forEach(item => this.addItem(item));
     }
 
     addItem(item) {
     	if(this.items.length <= this.capasity){
-            item.id = `${item.name.split(' ').join("_")}-${this.uuidv4()}`
+            item.id = this.generateId(item)
             this.items.push(item)  
-            $('#bag').append(`<img id="${item.id}" src=./res/${item.category}/${decapitalizeFirstLetter(item.constructor.name)}.png class="${item.category}" draggable="false"/>`)
-			$(`#${item.id}`).draggable()
-
+            $('#bag').append(`<img id="${item.id}" src=./res/${item.category}/${decapitalizeFirstLetter(item.constructor.name)}.png class="item ${item.category}" draggable="false"/>`)
+	       this.makeDraggable(item)
     	} else {
 			console.error(`${item.name} не поместился в сумку и был выброшен в трубу!`)    		
     	}
+    }
+
+    generateId(item) {
+        return `${item.name.split(' ').join("_")}-${this.uuidv4()}`
+    }
+
+    makeDraggable(item){
+        $(`#${item.id}`).draggable({
+            stop: ()=> {
+                console.log("!!!")
+                this.rerender()
+            }
+        });
     }
 
     uuidv4() {
@@ -26,11 +39,22 @@ export default class Bag {
         return v.toString(16);
       });
     }
+
     removeItem(itemEl) {
         let id = itemEl.attr("id")
+        let deletingItem = this.items.find(item => item.id === id)
         this.items = this.items.filter(item => item.id !== id)
         itemEl.remove();
-        console.log(itemEl)
+        console.log(`Ты выбросил ${deletingItem.name} в трубу`)
+    }
+
+    rerender(){
+        $('#bag').empty()
+        this.items.forEach(item => {
+            item.id = item.id || this.generateId(item)
+            $('#bag').append(`<img id="${item.id}" src=./res/${item.category}/${decapitalizeFirstLetter(item.constructor.name)}.png class="item ${item.category}" draggable="false"/>`)
+            this.makeDraggable(item)
+        });
     }
 
 }
