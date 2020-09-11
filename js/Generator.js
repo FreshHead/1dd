@@ -1,11 +1,11 @@
 import Weapon from "./Weapon.js"
-import {QUALITIES} from "./enums/qualities.js"
-import {MATERIALS} from "./enums/materials.js"
-import {TYPES} from "./enums/types.js";
-import {ENCHANTMENTS} from "./enums/enchantments.js";
+import { QUALITIES } from "./enums/qualities.js"
+import { MATERIALS } from "./enums/materials.js"
+import { TYPES } from "./enums/types.js";
+import { ENCHANTMENTS } from "./enums/enchantments.js";
 
 export class Generator {
-  genWeapon(){
+  genWeapon() {
     let quality = this.getRandom(QUALITIES);
     let material = this.getRandom(MATERIALS);
     let type = this.getRandom(TYPES);
@@ -14,8 +14,8 @@ export class Generator {
     return new Weapon(quality, material, type, enchantments)
   }
 
-  getRandom(objects){
-    return  objects[Math.floor(Math.random() * objects.length)];
+  getRandom(objects) {
+    return objects[Math.floor(Math.random() * objects.length)];
   }
 
 }

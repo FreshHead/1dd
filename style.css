@@ -14,15 +14,7 @@ body
 
 .container {
     display: flex;
-}
-
-#genWeaponBtn{
-    font-size: 2rem;
-}
-
-#weaponName{
-    margin-top: 1rem;
-    font-size: 1.5rem;
+    background-color: pink;
 }
 
 #chimney{
@@ -77,20 +69,25 @@ body
     cursor: grabbing;
 }
 
-/*#bag div{
-    background-color: blue;
+#hand {
     height: 5rem;
     width: 5rem;
-}*/
-
-#hand {
-    height: 6rem;
-    width: 6rem;
     background-color: green;
+}
+
+#hand img{
+    height: 5rem;
+    width: 5rem;
 }
 
 #monster {
     height: 95%;
     width: 95%;
     object-fit: contain;
+}
+
+#stats {
+    background-color: black;
+    height: 5rem;
+    width: 5rem;
 }

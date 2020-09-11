@@ -1,5 +1,5 @@
 export default class Monster {
-	drop = [];
+    drop = [];
     constructor(maxHp, minDmg, maxDmg, speed, name, drop) {
         this.maxHp = maxHp;
         this.hp = this.maxHp;
@@ -7,8 +7,8 @@ export default class Monster {
         this.minDmg = minDmg;
         this.maxDmg = maxDmg;
         this.name = name;
-        if(drop){
-        	this.drop = drop;
+        if (drop) {
+            this.drop = drop;
         }
     }
 

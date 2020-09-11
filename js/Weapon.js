@@ -1,11 +1,11 @@
 import Item from "./Item.js";
 export default class Weapon extends Item {
   category = "weapons";
-  constructor(name, price){
+  constructor(name, price) {
     super(name, price)
   }
 
-  toString(){
+  toString() {
     // return this.capitalize(`${this.quality} ${this.material} ${this.type} ${this.enchantment}`);
   }
 

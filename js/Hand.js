@@ -4,15 +4,13 @@ export default class Hand {
 
     }
 
-    putWeapon(weapon){
-    	$('#hand').append(`<img id="${weapon.id}" src=${weapon[0].src} class="item ${weapon.category}" draggable="false"/>`)
-    	// $('#hand').append(weapon[0])
-    	// $('hand').append(`<img id="${item.id}" src=./res/${item.category}/${decapitalizeFirstLetter(item.constructor.name)}.png class="item ${item.category}" draggable="false"/>`)1
+    putWeapon(weapon) {
+        $('#hand').append(`<img id="${weapon.id}" src=${weapon.src} class="item ${weapon.category}" draggable="false"/>`)
     }
 
-    rerender(){
+    rerender() {
         $('#hand').empty()
-        
-      
+
+
     }
 }
