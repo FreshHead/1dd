@@ -1,6 +1,7 @@
 import {Generator} from './Generator.js';
 import Hero from "./Hero.js";
 import Bag from "./Bag.js"
+import Hand from "./Hand.js"
 import Bat from "./monsters/Bat.js";
 import Ghost from "./monsters/Ghost.js";
 import Imp from "./monsters/Imp.js"
@@ -11,17 +12,21 @@ console.log("Игра началась!")
 
 let hero = new Hero();
 let bag = new Bag();
-
-$("#bag").on('click', '.weapons', function () {
-  let e = window.event;
-  let target = e.target;
-  console.log(`Выбрано оружие ${target.name}`)
-});
+let hand = new Hand();
 
 $("#chimney").droppable({
-    drop: (event, ui)=> {
+    drop: (event, ui) => {
     var draggable = ui.draggable;
-    bag.removeItem(draggable);
+    bag.trashItem(draggable);
+    }
+});
+
+$("#hand").droppable({
+    drop: (event, ui) => {
+    let weapon = ui.draggable;
+    bag.removeItem(weapon);
+    // bag.items = bag.items.filter(item => item.id !== weapon.attr("id"))
+    hand.putWeapon(weapon[0]);
     }
 });
 

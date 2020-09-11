@@ -6,7 +6,6 @@ export default class Bag {
 	items = [new Sword()];
     constructor() {
         this.rerender()
-    	// this.items.forEach(item => this.addItem(item));
     }
 
     addItem(item) {
@@ -40,12 +39,17 @@ export default class Bag {
       });
     }
 
-    removeItem(itemEl) {
+    trashItem(itemEl) {
         let id = itemEl.attr("id")
-        let deletingItem = this.items.find(item => item.id === id)
+        this.removeItem(itemEl)
         this.items = this.items.filter(item => item.id !== id)
         itemEl.remove();
         console.log(`Ты выбросил ${deletingItem.name} в трубу`)
+    }
+
+    removeItem(itemEl){
+        let id = itemEl.attr("id")
+        this.items = this.items.filter(item => item.id !== id)
     }
 
     rerender(){
