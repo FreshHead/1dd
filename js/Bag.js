@@ -3,8 +3,9 @@ import decapitalizeFirstLetter from "./Utils.js"
 
 export default class Bag {
     capasity = 9;
-    items = [new Sword()];
+    items = [];
     constructor() {
+        this.addItem(new Sword());
         this.rerender()
     }
 
@@ -12,7 +13,12 @@ export default class Bag {
         if (this.items.length <= this.capasity) {
             item.id = this.generateId(item)
             this.items.push(item)
-            $('#bag').append(`<img id="${item.id}" src=./res/${item.category}/${decapitalizeFirstLetter(item.constructor.name)}.png class="item ${item.category}" draggable="false"/>`)
+            $('#bag').append(`<img id="${item.id}" 
+                src=./res/${item.category}/${decapitalizeFirstLetter(item.constructor.name)}.png 
+                class="item ${item.category}" 
+                title="${item.tooltip}"
+                draggable="false" 
+            />`);
             this.makeDraggable(item)
         } else {
             console.error(`${item.name} не поместился в сумку и был выброшен в трубу!`)

@@ -61,8 +61,10 @@ function battle(monster) {
 
         }, monster.speed);
             let heroTurn = setInterval(() => {
-                monster.hp -= 5;
+                let damage = Math.floor(Math.random() * 4) + 2;
+                monster.hp -= damage;
                 $("#monsterHP").width((monster.hp / monster.maxHp * 100) + "%")
+                $("#damage").text(damage)
                 console.log(`Жизнь ${monster.name}: ${monster.hp}/${monster.maxHp} hp`);
                 if (monster.hp <= 0) {
                     clearInterval(heroTurn);

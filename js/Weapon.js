@@ -1,8 +1,8 @@
 import Item from "./Item.js";
 export default class Weapon extends Item {
   category = "weapons";
-  constructor(name, price) {
-    super(name, price)
+  constructor(name, price, tooltip) {
+    super(name, price, tooltip)
   }
 
   toString() {
